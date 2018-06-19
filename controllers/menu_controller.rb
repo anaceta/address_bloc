@@ -9,6 +9,7 @@ class MenuController
     
     def main_menu
         puts "Main Menu - #{address_book.entries.count} entries"
+        puts "0 - View entry by number"
         puts "1 - View all entries"
         puts "2 - Create an entry"
         puts "3 - Search for an entry"
@@ -19,6 +20,10 @@ class MenuController
         selection = gets.to_i
         
         case selection
+            when 0
+                system "clear"
+                view_entry_number
+                main_menu
             when 1
                 system "clear"
                 view_all_entries
@@ -44,6 +49,23 @@ class MenuController
                 main_menu
         end
     end
+    
+    def view_entry_number
+        puts "Which entry would you like to view?"
+        print "Entry Number: "
+        entry_number = gets.chomp.to_i
+        
+        if entry_number < address_book.entries.count
+            puts address_book.entries[entry_number]
+            puts "Press enter to return to the main menu"
+            gets.chomp
+            system "clear"
+        else
+            puts "Invalid entry number"
+            view_entry_number
+        end
+    end
+        
             
     def view_all_entries
         address_book.entries.each do |entry|
@@ -92,10 +114,8 @@ class MenuController
         case selection
 
             when "n"
-        
             when "d"
             when "e"
-        
             when "m"
                 system "clear"
                 main_menu
